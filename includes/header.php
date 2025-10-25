@@ -12,10 +12,10 @@
   <body>
   <nav class="navbar navbar-expand-lg bg-soft-blue border-bottom sticky-top py-2">
     <div class="container-fluid px-5">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="index.php">
-        <img src="assets/img/logo-2(1).png" alt="logo" width="32" onerror="this.style.display='none'">
-        <span class="fw-bold fs-5"><?php echo APP_NAME; ?></span>
-      </a>
+<a class="navbar-brand d-flex align-items-center gap-2" href="index.php">
+  <img src="assets/img/logo.png" alt="JM Center Logo" class="logo" onerror="this.style.display='none'">
+  <span class="fw-bold fs-5"><?php echo APP_NAME; ?></span>
+</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
         <span class="navbar-toggler-icon"></span>
       </button>

@@ -7,6 +7,12 @@
     align-items: center;     /* Tengah secara vertikal */
 }
 
+.hero img {
+  width: 100%;
+  height: auto;
+  /* transition: transform 0.1s ease; */
+}
+
 .hero h1{
     font-weight:800;
     letter-spacing:-.02em
@@ -94,6 +100,40 @@ body {
     font-size: 1.2rem;
 }
 
+.navbar-brand .logo {
+  height: 40px;              /* ukuran logo pas untuk navbar */
+  width: auto;
+  object-fit: contain;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+
+/* Efek hover opsional */
+.navbar-brand:hover .logo {
+  transform: scale(1.05);
+}
+
 .btn-primary {
     font-size: 1.1rem;
+}
+
+@media (max-width: 992px) {
+  .navbar .container-fluid {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .hero{
+    background:#e6f3ff;
+    margin-top: -130px; /* geser naik setinggi navbar */
+    padding-top: 56px; /* kasih ruang supaya konten gak ketutup */
+    min-height: 100vh;       /* ✅ Tambahkan ini */
+    display: flex;           /* Supaya isi bisa di tengah vertikal */
+    align-items: center;     /* Tengah secara vertikal */
+}
+
+  .hero img {
+    transform: scale(1.2);     /* perbesar 130% */
+    margin-top: 4rem;          /* beri jarak sedikit biar gak nempel */
+  }
 }
