@@ -1,18 +1,82 @@
-.hero{background:#f8fbff;padding:64px 0}
-.hero h1{font-weight:800;letter-spacing:-.02em}
-.feature-icon{width:44px;height:44px}
-.card-service:hover{transform:translateY(-4px);transition:.2s}
+.hero{
+    background:#e6f3ff;
+      margin-top: -70px; /* geser naik setinggi navbar */
+  padding-top: 56px; /* kasih ruang supaya konten gak ketutup */
+    min-height: 100vh;       /* ✅ Tambahkan ini */
+    display: flex;           /* Supaya isi bisa di tengah vertikal */
+    align-items: center;     /* Tengah secara vertikal */
+}
+
+.hero h1{
+    font-weight:800;
+    letter-spacing:-.02em
+}
+
+.feature-icon{
+    width:44px;
+    height:44px
+}
+
+.card-service:hover{
+    transform:translateY(-4px);
+    transition:.2s
+}
+
 .bg-soft-blue {
     background-color: #e6f3ff;  /* Warna biru muda pastel */
     padding: 4rem 0;
 }
+
 .navbar {
     min-height: 56px;
+    background-color: #e6f3ff; /* biru muda */
+    transition:
+        background-color 0.6s ease,
+        box-shadow 0.6s ease,
+        opacity 0.6s ease;  /* transisi halus */
+    opacity: 0.99;
+    -webkit-backdrop-filter: blur(6px); /* efek modern halus */
+    backdrop-filter: blur(6px); /* efek modern halus */
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Warna setelah scroll */
+.navbar-scrolled {
+  background-color: #ffffff !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  opacity: 1;
+}
+
+/* Teks link di navbar */
+.navbar a.nav-link {
+  color: #004080; /* teks di biru */
+  transition: color 0.4s ease;
+}
+
+.navbar-scrolled a.nav-link {
+  color: #333; /* teks di putih */
 }
 
 .navbar-brand img {
     height: 42px;
     width: auto;
+}
+
+/* Hilangkan border pada hamburger button */
+.navbar-toggler {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+    transition: transform 0.3s ease;  /* transisi halus */
+}
+
+.navbar-toggler.rotated {
+  transform: rotate(90deg);         /* rotasi searah jarum jam */
+}
+
+.navbar-toggler-icon {
+  filter: invert(40%); /* tetap terlihat di dua background */
 }
 
 body {

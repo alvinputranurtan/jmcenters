@@ -1,4 +1,4 @@
-<section class="hero bg-soft-blue">
+<section class="hero">
   <div class="container-fluid px-5">
     <div class="row align-items-center g-4">
       <div class="col-lg-6 text-center">
@@ -67,3 +67,24 @@
     </div>
   </div>
 </section>
+
+
+<!-- Script scroll effect -->
+<script>
+  window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > window.innerHeight - 80) {
+      navbar.classList.add('navbar-scrolled');
+    } else {
+      navbar.classList.remove('navbar-scrolled');
+    }
+  });
+
+    // Hamburger rotation
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggler = document.querySelector('.navbar-toggler');
+    toggler.addEventListener('click', function() {
+      this.classList.toggle('rotated');
+    });
+  });
+</script>
