@@ -125,7 +125,7 @@ body {
 
   .hero{
     background:#e6f3ff;
-    margin-top: -130px; /* geser naik setinggi navbar */
+    margin-top: -60px; /* geser naik setinggi navbar */
     padding-top: 56px; /* kasih ruang supaya konten gak ketutup */
     min-height: 100vh;       /* ✅ Tambahkan ini */
     display: flex;           /* Supaya isi bisa di tengah vertikal */
