@@ -31,7 +31,7 @@ try {
     <img src="<?php echo htmlspecialchars($user['picture']); ?>" alt="User Photo" class="rounded-circle mb-3" width="100" height="100">
     <h4 class="fw-semibold"><?php echo htmlspecialchars($user['name']); ?></h4>
     <p class="text-muted"><?php echo htmlspecialchars($user['email']); ?></p>
-    <a href="<?php echo BASE_URL; ?>/includes/logout.php" class="btn btn-outline-danger btn-sm mt-2">Logout</a>
+    
   </div>
 
   <hr class="my-5">
