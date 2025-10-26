@@ -4,7 +4,7 @@
       <div class="col-lg-6 text-center">
         <h1 class="display-5 mb-3">Pulihkan Gerak, <span class="text-primary">Nikmati Hidup</span></h1>
         <p class="lead text-muted">Pusat fisioterapi modern untuk nyeri muskuloskeletal, pemulihan pasca operasi, cedera olahraga, hingga program koreksi postur.</p>
-        <a class="btn btn-primary btn-lg" href="index.php?p=appointment">Jadwalkan Fisio</a>
+        <a class="btn btn-primary btn-lg" href="index.php?p=appointment">Jadwalkan Massage</a>
         <!-- <a class="btn btn-outline-primary btn-lg ms-2" href="index.php?p=services">Lihat Layanan</a> -->
         <div class="d-flex gap-4 mt-4">
           <!-- <div class="d-flex align-items-center gap-2"><img class="feature-icon" src="assets/img/ReservasiFleksibel.png" alt=""> <small>Reservasi fleksibel</small></div>
