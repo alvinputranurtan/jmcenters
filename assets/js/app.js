@@ -10,6 +10,15 @@ $(function(){
     e.preventDefault();
     const $form = $(this);
     const $btn = $form.find('button[type=submit]');
+
+    // pastikan tanggal & waktu dipilih sebelum submit
+    const preferredDate = $form.find('[name=preferred_date]').val();
+    const preferredTime = $form.find('[name=preferred_time]').val();
+    if(!preferredDate || !preferredTime){
+      $('#apAlert').removeClass('d-none alert-success').addClass('alert alert-danger').text('Pilih tanggal dan waktu sebelum mengirim.');
+      return;
+    }
+
     $btn.prop('disabled', true).text('Mengirim...');
     try{
       const res = await fetch('appointment_submit.php', { method:'POST', body: new FormData(this)});

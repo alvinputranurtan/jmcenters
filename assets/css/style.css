@@ -117,6 +117,17 @@ body {
     font-size: 1.1rem;
 }
 
+#timeSlots button.active {
+  background-color: #0d6efd;
+  color: white;
+}
+#timeSlots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+
 @media (max-width: 992px) {
   .navbar .container-fluid {
     padding-left: 1rem !important;
