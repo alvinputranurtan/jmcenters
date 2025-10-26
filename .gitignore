@@ -1,2 +1,3 @@
 .well-known/
+.env
 /assets/notes/notes.md
