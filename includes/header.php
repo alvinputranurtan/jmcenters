@@ -22,6 +22,9 @@ $noindex = !empty($meta['noindex']);
 
 // OG image default (buat file-nya supaya tidak 404)
 $ogImage = $base.'/assets/img/og-image.jpg';
+
+// === SEO additions (tanpa mengubah struktur lain) ===
+$robots = $noindex ? 'noindex, nofollow, noarchive' : 'index, follow, max-image-preview:large';
 ?>
 
 <!doctype html>
@@ -29,32 +32,46 @@ $ogImage = $base.'/assets/img/og-image.jpg';
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Favicon standard (PALING PENTING UNTUK GOOGLE) -->
     <link rel="icon" href="/favicon.ico">
 
-    <title><?php echo htmlspecialchars($meta['title']); ?></title>
-    <meta name="description" content="<?php echo htmlspecialchars($meta['description']); ?>">
+    <!-- Favicon modern -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <!-- Apple -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Android / PWA -->
+    <link rel="manifest" href="/site.webmanifest">
+
+
+    <title><?php echo htmlspecialchars($meta['title'], ENT_QUOTES, 'UTF-8'); ?></title>
+    <meta name="description" content="<?php echo htmlspecialchars($meta['description'], ENT_QUOTES, 'UTF-8'); ?>">
     <?php if (!empty($meta['keywords'])) { ?>
-      <meta name="keywords" content="<?php echo htmlspecialchars($meta['keywords']); ?>">
+      <meta name="keywords" content="<?php echo htmlspecialchars($meta['keywords'], ENT_QUOTES, 'UTF-8'); ?>">
     <?php } ?>
 
-    <link rel="canonical" href="<?php echo htmlspecialchars($canonical); ?>">
+    <link rel="canonical" href="<?php echo htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8'); ?>">
 
-    <?php if ($noindex) { ?>
-      <meta name="robots" content="noindex, nofollow">
-    <?php } ?>
+    <!-- Robots -->
+    <meta name="robots" content="<?php echo htmlspecialchars($robots, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="<?php echo htmlspecialchars($meta['title']); ?>">
-    <meta property="og:description" content="<?php echo htmlspecialchars($meta['description']); ?>">
+    <meta property="og:site_name" content="<?php echo htmlspecialchars(APP_NAME, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta property="og:title" content="<?php echo htmlspecialchars($meta['title'], ENT_QUOTES, 'UTF-8'); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($meta['description'], ENT_QUOTES, 'UTF-8'); ?>">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="<?php echo htmlspecialchars($canonical); ?>">
-    <meta property="og:image" content="<?php echo htmlspecialchars($ogImage); ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta property="og:image" content="<?php echo htmlspecialchars($ogImage, ENT_QUOTES, 'UTF-8'); ?>">
+    <meta property="og:image:alt" content="<?php echo htmlspecialchars(APP_NAME.' Logo', ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<?php echo htmlspecialchars($meta['title']); ?>">
-    <meta name="twitter:description" content="<?php echo htmlspecialchars($meta['description']); ?>">
-    <meta name="twitter:image" content="<?php echo htmlspecialchars($ogImage); ?>">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($meta['title'], ENT_QUOTES, 'UTF-8'); ?>">
+    <meta name="twitter:description" content="<?php echo htmlspecialchars($meta['description'], ENT_QUOTES, 'UTF-8'); ?>">
+    <meta name="twitter:image" content="<?php echo htmlspecialchars($ogImage, ENT_QUOTES, 'UTF-8'); ?>">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">

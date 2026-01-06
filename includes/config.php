@@ -25,11 +25,6 @@ define('DB_PASS', $_ENV['DB_PASS'] ?? 'jmcenterAdmin');
 $isLocal = str_contains($_SERVER['HTTP_HOST'], 'localhost');
 define('BASE_URL', $isLocal ? 'http://localhost:8080/jmcenters' : 'https://jmcenters.com');
 
-// Google OAuth Config
-define('GOOGLE_CLIENT_ID', $_ENV['GOOGLE_CLIENT_ID'] ?? '');
-define('GOOGLE_CLIENT_SECRET', $_ENV['GOOGLE_CLIENT_SECRET'] ?? '');
-define('GOOGLE_REDIRECT_URI', BASE_URL.'/includes/google_callback.php');
-
 session_start();
 
 function db()
@@ -45,4 +40,14 @@ function db()
     }
 
     return $pdo;
+}
+
+// Helper (optional)
+function current_url(): string
+{
+    $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? '';
+    $uri = $_SERVER['REQUEST_URI'] ?? '/';
+
+    return $scheme.'://'.$host.$uri;
 }

@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /includes/
+Disallow: /vendor/
+Disallow: /api/
+Disallow: /pages/
+
+# Parameter internal yang tidak perlu diindeks
+Disallow: /*?p=orders
+Disallow: /*?p=admin_dashboard
+
+Sitemap: https://jmcenters.com/sitemap.xml

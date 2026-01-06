@@ -1,82 +1,99 @@
 <?php
 
+require_once __DIR__.'/includes/config.php';
+
+// --- routing ---
 $page = $_GET['p'] ?? 'home';
 
 $allowed = [
-    'home',
-    'services',
-    'pricing',
-    'about',
-    'contact',
-    'appointment',
-    'orders',
-    'admin_dashboard',
+    'home', 'services', 'pricing', 'about', 'contact',
+    'appointment', 'orders', 'admin_dashboard',
 ];
 
 if (!in_array($page, $allowed, true)) {
+    http_response_code(404);
     $page = 'home';
 }
 
-/*
-|--------------------------------------------------------------------------
-| SEO meta per halaman
-| - Sesuaikan description & keywords biar relevan dengan konten.
-| - Halaman internal (orders/admin) dibuat noindex.
-|--------------------------------------------------------------------------
-*/
-$seoMap = [
+// --- base meta defaults ---
+$baseTitle = APP_NAME.' — '.APP_TAGLINE;
+$baseDesc = 'Pusat fisioterapi modern untuk nyeri muskuloskeletal, pemulihan pasca operasi, cedera olahraga, hingga program koreksi postur.';
+$baseUrl = rtrim(BASE_URL, '/');
+
+// Canonical untuk routing index.php?p=...
+$canonical = $baseUrl.'/index.php'.($page !== 'home' ? ('?p='.urlencode($page)) : '');
+
+// OG Image: pastikan file ini ada (kalau belum, pakai logo.png dulu)
+$ogImage = $baseUrl.'/assets/img/logo.png';
+
+// --- per-page meta ---
+$metaMap = [
     'home' => [
-        'title' => 'JM Center — Wellness & Movement Center',
-        'description' => 'Pusat fisioterapi modern untuk nyeri muskuloskeletal, pemulihan pasca operasi, cedera olahraga, dan program koreksi postur.',
-        'keywords' => 'JM Center, fisioterapi, rehab, pemulihan, cedera olahraga, koreksi postur',
+        'title' => $baseTitle,
+        'description' => $baseDesc,
+        'canonical' => $baseUrl.'/',
+        'noindex' => false,
     ],
     'services' => [
-        'title' => 'Layanan Fisioterapi — JM Center',
-        'description' => 'Layanan unggulan JM Center: terapi nyeri, rehab pasca operasi, sports injury clinic, koreksi postur, terapi bahu & leher, dan home care.',
-        'keywords' => 'layanan fisioterapi, terapi nyeri, rehab, sports injury, koreksi postur, home care',
+        'title' => 'Layanan Fisioterapi — '.APP_NAME,
+        'description' => 'Layanan fisioterapi: nyeri pinggang, rehab pasca operasi, sports injury, koreksi postur, terapi bahu/leher, dan home care visit.',
+        'canonical' => $canonical,
+        'noindex' => false,
     ],
     'pricing' => [
-        'title' => 'Paket & Harga — JM Center',
-        'description' => 'Pilih kunjungan tunggal atau paket bundel hemat untuk program rehabilitasi berkelanjutan di JM Center.',
-        'keywords' => 'harga fisioterapi, paket fisioterapi, biaya rehab',
+        'title' => 'Paket & Harga — '.APP_NAME,
+        'description' => 'Informasi paket dan harga terapi yang transparan. Pilih kunjungan single atau paket hemat untuk program rehabilitasi.',
+        'canonical' => $canonical,
+        'noindex' => false,
     ],
     'about' => [
-        'title' => 'Tentang JM Center',
-        'description' => 'JM Center adalah Wellness & Movement Center dengan pendekatan terukur untuk pemulihan gerak, pengurangan nyeri, dan peningkatan kualitas hidup.',
-        'keywords' => 'tentang JM Center, wellness center, movement center',
+        'title' => 'Tentang — '.APP_NAME,
+        'description' => 'Tentang JM Center. Fokus pada pemulihan gerak, pencegahan cedera, edukasi pasien, dan program terapi berbasis evaluasi.',
+        'canonical' => $canonical,
+        'noindex' => false,
     ],
     'contact' => [
-        'title' => 'Kontak — JM Center',
-        'description' => 'Hubungi JM Center untuk konsultasi, pertanyaan layanan, dan informasi jadwal.',
-        'keywords' => 'kontak JM Center, alamat, whatsapp',
-    ],
-    'appointment' => [
-        'title' => 'Jadwalkan Kunjungan — JM Center',
-        'description' => 'Buat jadwal kunjungan dengan mudah. Pilih layanan dan waktu yang tersedia di JM Center.',
-        'keywords' => 'booking fisioterapi, jadwal terapi, appointment',
+        'title' => 'Kontak — '.APP_NAME,
+        'description' => 'Hubungi JM Center untuk konsultasi dan jadwal terapi. Alamat, WhatsApp, email, dan informasi kontak lainnya.',
+        'canonical' => $canonical,
+        'noindex' => false,
     ],
 
-    // Halaman internal -> jangan diindeks mesin pencari
+    // halaman yang boleh kamu pilih: mau diindeks atau tidak.
+    // appointment biasanya bagus DIINDEKS karena jadi landing "Jadwalkan".
+    'appointment' => [
+        'title' => 'Jadwalkan Fisio — '.APP_NAME,
+        'description' => 'Jadwalkan sesi fisioterapi di JM Center. Pilih layanan, tanggal, jam, dan isi data kontak.',
+        'canonical' => $canonical,
+        'noindex' => false,
+    ],
+
+    // INTERNAL/PRIVAT: jangan diindeks
     'orders' => [
-        'title' => 'Pesananku — JM Center',
-        'description' => 'Riwayat pesanan Anda di JM Center.',
-        'keywords' => '',
+        'title' => 'Pesananku — '.APP_NAME,
+        'description' => 'Halaman akun pengguna.',
+        'canonical' => $canonical,
         'noindex' => true,
     ],
     'admin_dashboard' => [
-        'title' => 'Administrasi — JM Center',
-        'description' => 'Dashboard administrasi JM Center.',
-        'keywords' => '',
+        'title' => 'Administrasi — '.APP_NAME,
+        'description' => 'Halaman administrasi.',
+        'canonical' => $canonical,
         'noindex' => true,
     ],
 ];
 
-$meta = $seoMap[$page] ?? [
-    'title' => 'JM Center — Wellness & Movement Center',
-    'description' => 'Wellness & Movement Center.',
-    'keywords' => 'JM Center',
+// meta aktif
+$meta = $metaMap[$page] ?? [
+    'title' => $baseTitle,
+    'description' => $baseDesc,
+    'canonical' => $canonical,
+    'noindex' => false,
 ];
 
+$meta['og_image'] = $ogImage;
+
+// Include header/footer
 require_once __DIR__.'/includes/header.php';
 include __DIR__.'/pages/'.$page.'.php';
 require_once __DIR__.'/includes/footer.php';
