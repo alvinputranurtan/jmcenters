@@ -1,10 +1,60 @@
 <?php require_once __DIR__.'/config.php'; ?>
+
+<?php
+// index.php akan mengirim $page dan $meta.
+// fallback aman kalau ada akses langsung ke file.
+$page = $page ?? ($_GET['p'] ?? 'home');
+$meta = $meta ?? [
+    'title' => APP_NAME.' — '.APP_TAGLINE,
+    'description' => APP_TAGLINE,
+    'keywords' => '',
+];
+
+$base = rtrim(BASE_URL, '/');
+
+// canonical rapi (home = /, lainnya query p=)
+$canonical = ($page === 'home')
+  ? $base.'/'
+  : $base.'/index.php?p='.urlencode($page);
+
+// halaman internal (orders/admin) noindex
+$noindex = !empty($meta['noindex']);
+
+// OG image default (buat file-nya supaya tidak 404)
+$ogImage = $base.'/assets/img/og-image.jpg';
+?>
+
 <!doctype html>
 <html lang="id">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo APP_NAME; ?> — <?php echo APP_TAGLINE; ?></title>
+
+    <title><?php echo htmlspecialchars($meta['title']); ?></title>
+    <meta name="description" content="<?php echo htmlspecialchars($meta['description']); ?>">
+    <?php if (!empty($meta['keywords'])) { ?>
+      <meta name="keywords" content="<?php echo htmlspecialchars($meta['keywords']); ?>">
+    <?php } ?>
+
+    <link rel="canonical" href="<?php echo htmlspecialchars($canonical); ?>">
+
+    <?php if ($noindex) { ?>
+      <meta name="robots" content="noindex, nofollow">
+    <?php } ?>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="<?php echo htmlspecialchars($meta['title']); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars($meta['description']); ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo htmlspecialchars($canonical); ?>">
+    <meta property="og:image" content="<?php echo htmlspecialchars($ogImage); ?>">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($meta['title']); ?>">
+    <meta name="twitter:description" content="<?php echo htmlspecialchars($meta['description']); ?>">
+    <meta name="twitter:image" content="<?php echo htmlspecialchars($ogImage); ?>">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
