@@ -29,11 +29,8 @@ $ogImage = $base.'/assets/img/og-image.jpg';
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/assets/img/favicon.png" type="image/png" sizes="32x32">
-    <link rel="icon" href="/assets/img/favicon.png" type="image/png" sizes="16x16">
-    <link rel="apple-touch-icon" href="/assets/img/favicon.png">
-    <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/png">
-    
+    <link rel="icon" href="/favicon.ico">
+
     <title><?php echo htmlspecialchars($meta['title']); ?></title>
     <meta name="description" content="<?php echo htmlspecialchars($meta['description']); ?>">
     <?php if (!empty($meta['keywords'])) { ?>
